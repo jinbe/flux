@@ -1,8 +1,48 @@
-# Flux &middot; [![CI](https://github.com/sirsjg/flux/actions/workflows/ci.yml/badge.svg)](https://github.com/sirsjg/flux/actions/workflows/ci.yml) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat&logo=typescript&logoColor=white) ![Preact](https://img.shields.io/badge/Preact-673ab8?style=flat&logo=preact&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js_21+-339933?style=flat&logo=node.js&logoColor=white) ![pnpm](https://img.shields.io/badge/pnpm-f69220?style=flat&logo=pnpm&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ed?style=flat&logo=docker&logoColor=white) ![MCP](https://img.shields.io/badge/MCP-enabled-f59e0b?style=flat)
+<p align="center">
+  <img src="./docs/kibo-mascot.png" alt="Kibo - Flux Mascot" width="300">
+</p>
 
-Ship with less chaos. Flux is a fast, simple Kanban board with MCP integration so your LLMs can help run the show.  Create your tasks (or let your LLM) then let you agent take you to glory.  The ultimate spec-driven vibe tool.
+# [![CI](https://github.com/sirsjg/flux/actions/workflows/ci.yml/badge.svg)](https://github.com/sirsjg/flux/actions/workflows/ci.yml) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat&logo=typescript&logoColor=white) ![Preact](https://img.shields.io/badge/Preact-673ab8?style=flat&logo=preact&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js_21+-339933?style=flat&logo=node.js&logoColor=white) ![pnpm](https://img.shields.io/badge/pnpm-f69220?style=flat&logo=pnpm&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ed?style=flat&logo=docker&logoColor=white) ![MCP](https://img.shields.io/badge/MCP-enabled-f59e0b?style=flat)
+
+> Open, execution-agnostic task management
+
+Flux is a **completely open, unopinionated task management engine**.
+
+It doesn’t tell you how to work, who should do the work, or what should execute it.  
+Flux simply tracks **what needs to be done** — and leaves everything else up to you.
+
+Create tasks manually, via APIs, MCP, or automation tools.  
+Execute them yourself, with AI agents, or through systems like n8n.  
+Close them by hand or programmatically.
+
+Flux is just the **source of truth for tasks**.
+
+Everything else is optional.
 
 ![Demo](./docs/demo.gif)
+
+## Why Flux?
+
+Most task systems tightly couple **tasks**, **workflows**, and **execution**.  
+Flux deliberately separates them.
+
+- Tasks live in Flux
+- Execution happens anywhere
+- Humans, agents, and automation all coexist
+- No enforced process
+
+If you want a rigid workflow, Flux isn’t for you.  
+If you want **maximum flexibility**, it probably is.
+
+## What Flux Is (and Is Not)
+
+| ✅ **Flux *is*** | ❌ **Flux *is not*** |
+|------------------|----------------------|
+| 🔓 Open source and self-hosted | 📋 A project management methodology |
+| 🔌 API-first | 🧱 A UI-heavy SaaS |
+| 🔀 Execution-agnostic | 🤖 An AI platform that locks you into one model |
+| 👥 Friendly to humans, AI agents, and automation | 🧠 A system that assumes how work should happen |
+| 🧩 A stable foundation for any workflow | 🚧 A tool that forces process or structure |
 
 ## Features
 
