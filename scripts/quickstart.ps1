@@ -12,7 +12,9 @@ Write-Host "Starting Flux web/API..."
 docker compose up -d
 
 Write-Host ""
-Write-Host "Flux is running: http://localhost:3000"
+Write-Host "Flux web UI is running: http://localhost:3000"
 Write-Host ""
-Write-Host "Run MCP (Claude/Codex):"
-Write-Host "  docker run -i --rm -v flux-data:/app/packages/data flux-mcp"
+Write-Host "Starting MCP server (Claude/Codex)..."
+Write-Host "Press Ctrl+C to stop the MCP server"
+Write-Host ""
+docker run -i --rm -v flux-data:/app/packages/data flux-mcp
