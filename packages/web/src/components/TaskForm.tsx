@@ -1,4 +1,5 @@
 import { useState, useEffect } from "preact/hooks";
+import { ConfirmModal } from "./ConfirmModal";
 import { Modal } from "./Modal";
 import {
   createTask,
@@ -42,12 +43,19 @@ export function TaskForm({
   const [comments, setComments] = useState<TaskComment[]>([]);
   const [commentBody, setCommentBody] = useState("");
   const [commentSubmitting, setCommentSubmitting] = useState(false);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [deleteCommentId, setDeleteCommentId] = useState<string | null>(null);
 
   const isEdit = !!task;
 
   useEffect(() => {
     if (isOpen) {
+      setDeleteConfirmOpen(false);
+      setDeleteCommentId(null);
       loadFormData();
+    } else {
+      setDeleteConfirmOpen(false);
+      setDeleteCommentId(null);
     }
   }, [isOpen, task, projectId, defaultEpicId]);
 
@@ -111,13 +119,22 @@ export function TaskForm({
     }
   };
 
-  const handleDelete = async () => {
-    if (task && confirm("Delete this task?")) {
-      setSubmitting(true);
+  const handleDelete = () => {
+    if (task && !submitting) {
+      setDeleteConfirmOpen(true);
+    }
+  };
+
+  const handleDeleteConfirmed = async () => {
+    if (!task || submitting) return;
+    setSubmitting(true);
+    try {
       await deleteTask(task.id);
       await onSave();
       onClose();
+    } finally {
       setSubmitting(false);
+      setDeleteConfirmOpen(false);
     }
   };
 
@@ -136,16 +153,23 @@ export function TaskForm({
 
   const handleDeleteComment = async (commentId: string) => {
     if (!task || commentSubmitting) return;
-    if (!confirm("Delete this comment?")) return;
+    setDeleteCommentId(commentId);
+  };
+
+  const handleDeleteCommentConfirmed = async () => {
+    if (!task || commentSubmitting || !deleteCommentId) return;
     setCommentSubmitting(true);
     try {
-      const success = await deleteTaskComment(task.id, commentId);
+      const success = await deleteTaskComment(task.id, deleteCommentId);
       if (success) {
-        setComments((prev) => prev.filter((comment) => comment.id !== commentId));
+        setComments((prev) =>
+          prev.filter((comment) => comment.id !== deleteCommentId)
+        );
         await onSave();
       }
     } finally {
       setCommentSubmitting(false);
+      setDeleteCommentId(null);
     }
   };
 
@@ -158,13 +182,14 @@ export function TaskForm({
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title={isEdit ? "Edit Task" : "New Task"}
-      boxClassName="!w-[70vw] !max-w-none"
-    >
-      <form onSubmit={handleSubmit}>
+    <>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        title={isEdit ? "Edit Task" : "New Task"}
+        boxClassName="!w-[70vw] !max-w-none"
+      >
+        <form onSubmit={handleSubmit}>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <div class="form-control mb-4">
@@ -409,7 +434,32 @@ export function TaskForm({
             )}
           </button>
         </div>
-      </form>
-    </Modal>
+        </form>
+      </Modal>
+      <ConfirmModal
+        isOpen={deleteConfirmOpen}
+        title="Delete Task?"
+        description="This action cannot be undone."
+        confirmLabel="Delete"
+        confirmClassName="btn-error"
+        onConfirm={handleDeleteConfirmed}
+        onClose={() => {
+          if (!submitting) setDeleteConfirmOpen(false);
+        }}
+        isLoading={submitting}
+      />
+      <ConfirmModal
+        isOpen={!!deleteCommentId}
+        title="Delete Comment?"
+        description="This action cannot be undone."
+        confirmLabel="Delete"
+        confirmClassName="btn-error"
+        onConfirm={handleDeleteCommentConfirmed}
+        onClose={() => {
+          if (!commentSubmitting) setDeleteCommentId(null);
+        }}
+        isLoading={commentSubmitting}
+      />
+    </>
   );
 }
