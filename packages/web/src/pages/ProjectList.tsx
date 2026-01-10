@@ -1,6 +1,11 @@
 import { useEffect, useState } from "preact/hooks";
 import { route, RoutableProps } from "preact-router";
 import {
+  Cog6ToothIcon,
+  ExclamationTriangleIcon,
+  PencilSquareIcon,
+} from "@heroicons/react/24/outline";
+import {
   getProjects,
   resetDatabase,
   updateProject,
@@ -192,10 +197,7 @@ export function ProjectList(_props: RoutableProps) {
             onClick={openSettings}
             title="Settings"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-1.14 1.603-1.14 1.902 0a1.724 1.724 0 002.591 1.008c.994-.574 2.158.59 1.584 1.584a1.724 1.724 0 001.008 2.59c1.14.3 1.14 1.604 0 1.903a1.724 1.724 0 00-1.008 2.59c.574.994-.59 2.158-1.584 1.584a1.724 1.724 0 00-2.59 1.008c-.3 1.14-1.604 1.14-1.903 0a1.724 1.724 0 00-2.59-1.008c-.994.574-2.158-.59-1.584-1.584a1.724 1.724 0 00-1.008-2.59c-1.14-.3-1.14-1.604 0-1.903a1.724 1.724 0 001.008-2.59c-.574-.994.59-2.158 1.584-1.584.89.515 2.042.032 2.59-1.008z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
+            <Cog6ToothIcon className="h-5 w-5" />
           </button>
           <ThemeToggle />
         </div>
@@ -232,18 +234,7 @@ export function ProjectList(_props: RoutableProps) {
                       openEditModal(project);
                     }}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      class="w-4 h-4"
-                      aria-hidden="true"
-                    >
-                      <path d="M9.4 1.6h5.2l.7 2.6a7.8 7.8 0 0 1 2.1.9l2.5-1.2 2.6 4.5-2.1 1.8a8 8 0 0 1 0 2.3l2.1 1.8-2.6 4.5-2.5-1.2a7.8 7.8 0 0 1-2.1.9l-.7 2.6H9.4l-.7-2.6a7.8 7.8 0 0 1-2.1-.9l-2.5 1.2-2.6-4.5 2.1-1.8a8 8 0 0 1 0-2.3L1.5 8.4l2.6-4.5 2.5 1.2c.7-.4 1.4-.7 2.1-.9l.7-2.6z" />
-                      <circle cx="12" cy="12" r="3.2" />
-                    </svg>
+                    <PencilSquareIcon className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </div>
                 {project.description && (
@@ -374,18 +365,7 @@ export function ProjectList(_props: RoutableProps) {
                   </p>
                 </div>
                 <div class="alert alert-warning">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M8.257 3.099c.765-1.36 2.72-1.36 3.485 0l6.518 11.591c.75 1.334-.213 2.99-1.742 2.99H3.48c-1.53 0-2.493-1.656-1.743-2.99L8.257 3.1z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
+                  <ExclamationTriangleIcon className="h-5 w-5" />
                   <span>
                     This action is permanent. You cannot undo a reset.
                   </span>

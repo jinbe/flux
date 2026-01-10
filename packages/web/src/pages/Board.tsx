@@ -26,6 +26,18 @@ import {
   ThemeToggle,
 } from "../components";
 import { useBoardPreferences } from "../hooks/useBoardPreferences";
+import {
+  ArrowLeftIcon,
+  Bars3BottomLeftIcon,
+  ChevronRightIcon,
+  EyeIcon,
+  EyeSlashIcon,
+  MagnifyingGlassIcon,
+  PencilSquareIcon,
+  PlusIcon,
+  Squares2X2Icon,
+  ViewColumnsIcon,
+} from "@heroicons/react/24/outline";
 
 interface BoardProps extends RoutableProps {
   projectId?: string;
@@ -283,31 +295,10 @@ export function Board({ projectId }: BoardProps) {
         <div class="navbar bg-base-100 shadow-lg mb-4">
           <div class="flex-1 flex items-center">
             <button class="btn btn-ghost btn-circle" onClick={() => route("/")}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-                  clip-rule="evenodd"
-                />
-              </svg>
+              <ArrowLeftIcon className="h-5 w-5" />
             </button>
             <div class="flex items-center gap-2 px-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-primary"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <rect x="3" y="3" width="7" height="7" rx="1.5" />
-                <rect x="14" y="3" width="7" height="7" rx="1.5" />
-                <rect x="3" y="14" width="7" height="7" rx="1.5" />
-                <rect x="14" y="14" width="7" height="7" rx="1.5" />
-              </svg>
+              <Squares2X2Icon className="h-6 w-6 text-primary" />
               <h1 class="text-xl font-bold">{projectName}</h1>
               <span class="text-base-content/50 text-lg ml-1">
                 {totalTaskCount} tasks
@@ -333,20 +324,7 @@ export function Board({ projectId }: BoardProps) {
           <div class="bg-base-100 rounded-xl p-4 shadow-sm mb-6">
             <div class="flex items-center gap-4">
               <div class="relative flex-1 max-w-sm">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-base-content/40"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
+                <MagnifyingGlassIcon className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-base-content/40" />
                 <input
                   type="text"
                   placeholder="Search tasks..."
@@ -417,14 +395,7 @@ export function Board({ projectId }: BoardProps) {
                   onClick={() => setViewMode("normal")}
                   title="Normal view"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                  </svg>
+                  <ViewColumnsIcon className="h-4 w-4" />
                 </button>
                 <button
                   class={`btn btn-sm join-item ${
@@ -433,18 +404,7 @@ export function Board({ projectId }: BoardProps) {
                   onClick={() => setViewMode("condensed")}
                   title="Condensed view"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
+                  <Bars3BottomLeftIcon className="h-4 w-4" />
                 </button>
               </div>
               {/* Planning Column Toggle */}
@@ -458,35 +418,11 @@ export function Board({ projectId }: BoardProps) {
                     ? "Show Planning column"
                     : "Hide Planning column"
                 }
-              >
-                {planningCollapsed ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z"
-                      clip-rule="evenodd"
-                    />
-                    <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
-                  </svg>
+                >
+                  {planningCollapsed ? (
+                  <EyeSlashIcon className="h-4 w-4" />
                 ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                    <path
-                      fill-rule="evenodd"
-                      d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
+                  <EyeIcon className="h-4 w-4" />
                 )}
                 <span class="ml-1 text-xs">Show Planning</span>
               </button>
@@ -516,20 +452,11 @@ export function Board({ projectId }: BoardProps) {
                     class="p-4 flex items-center gap-3 cursor-pointer hover:bg-base-200 transition-colors"
                     onClick={() => toggleEpicCollapse(epic.id)}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class={`h-5 w-5 text-base-content/40 transition-transform ${
+                    <ChevronRightIcon
+                      className={`h-5 w-5 text-base-content/40 transition-transform ${
                         isCollapsed ? "" : "rotate-90"
                       }`}
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
+                    />
                     <span
                       class="w-3 h-3 rounded-full flex-shrink-0"
                       style={{ backgroundColor: epicColor }}
@@ -545,14 +472,7 @@ export function Board({ projectId }: BoardProps) {
                         openEditEpic(epic);
                       }}
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                      </svg>
+                      <PencilSquareIcon className="h-4 w-4" />
                     </button>
                   </div>
 
@@ -576,19 +496,7 @@ export function Board({ projectId }: BoardProps) {
                                 {getColumnTasks("planning", epic.id).length})
                               </span>
                             </div>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-4 w-4 text-base-content/40 absolute top-2"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z"
-                                clip-rule="evenodd"
-                              />
-                              <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
-                            </svg>
+                            <EyeSlashIcon className="h-4 w-4 text-base-content/40 absolute top-2" />
                           </div>
                         )}
 
@@ -632,18 +540,7 @@ export function Board({ projectId }: BoardProps) {
                                       }}
                                       title="Add task to this epic"
                                     >
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-4 w-4"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                      >
-                                        <path
-                                          fill-rule="evenodd"
-                                          d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                                          clip-rule="evenodd"
-                                        />
-                                      </svg>
+                                      <PlusIcon className="h-4 w-4" />
                                     </button>
                                   )}
                                 </div>
@@ -698,20 +595,11 @@ export function Board({ projectId }: BoardProps) {
                 class="p-4 flex items-center gap-3 cursor-pointer hover:bg-base-200 transition-colors"
                 onClick={() => toggleEpicCollapse("unassigned")}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class={`h-5 w-5 text-base-content/40 transition-transform ${
+                <ChevronRightIcon
+                  className={`h-5 w-5 text-base-content/40 transition-transform ${
                     collapsedEpics.has("unassigned") ? "" : "rotate-90"
                   }`}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                />
                 <span class="w-3 h-3 rounded-full bg-base-content/40 flex-shrink-0" />
                 <span class="font-semibold">Unassigned</span>
                 <span class="text-base-content/40 text-sm bg-base-200 px-2 py-0.5 rounded">
@@ -739,19 +627,7 @@ export function Board({ projectId }: BoardProps) {
                             {getColumnTasks("planning", undefined).length})
                           </span>
                         </div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-4 w-4 text-base-content/40 absolute top-2"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z"
-                            clip-rule="evenodd"
-                          />
-                          <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
-                        </svg>
+                        <EyeSlashIcon className="h-4 w-4 text-base-content/40 absolute top-2" />
                       </div>
                     )}
 
@@ -791,18 +667,7 @@ export function Board({ projectId }: BoardProps) {
                                   }}
                                   title="Add unassigned task"
                                 >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-4 w-4"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                  >
-                                    <path
-                                      fill-rule="evenodd"
-                                      d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                                      clip-rule="evenodd"
-                                    />
-                                  </svg>
+                                  <PlusIcon className="h-4 w-4" />
                                 </button>
                               )}
                             </div>

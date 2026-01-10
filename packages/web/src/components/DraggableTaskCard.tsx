@@ -1,3 +1,4 @@
+import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import { useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
 import type { TaskWithBlocked } from '../stores'
@@ -147,9 +148,7 @@ export function DraggableTaskCard({
           )}
           {task.depends_on.length > 0 && (
             <div class={`flex items-center gap-1 text-xs ${task.blocked ? 'text-warning' : 'text-base-content/40'}`}>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" transform="rotate(180 10 10)" />
-              </svg>
+              <ArrowDownIcon className="h-3.5 w-3.5" />
               <span>{task.depends_on.length}</span>
             </div>
           )}
