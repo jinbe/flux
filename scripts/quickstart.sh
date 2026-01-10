@@ -13,7 +13,9 @@ echo "Starting Flux web/API..."
 docker compose up -d
 
 echo ""
-echo "Flux is running: http://localhost:3000"
+echo "Flux web UI is running: http://localhost:3000"
 echo ""
-echo "Run MCP (Claude/Codex):"
-echo "  docker run -i --rm -v flux-data:/app/packages/data flux-mcp"
+echo "Starting MCP server (Claude/Codex)..."
+echo "Press Ctrl+C to stop the MCP server"
+echo ""
+docker run -i --rm -v flux-data:/app/packages/data flux-mcp
