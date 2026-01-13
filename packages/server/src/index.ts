@@ -28,6 +28,7 @@ import {
   addTaskComment,
   deleteTaskComment,
   isTaskBlocked,
+  getReadyTasks,
   cleanupProject,
   getWebhooks,
   getWebhook,
@@ -41,6 +42,7 @@ import {
 } from '@flux/shared';
 import { createAdapter } from '@flux/shared/adapters';
 import { handleWebhookEvent, testWebhookDelivery } from './webhook-service.js';
+import { authMiddleware } from './middleware/auth.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -67,6 +69,12 @@ const app = new Hono();
 
 // Enable CORS for development
 app.use('*', cors());
+
+// Auth middleware (readonly public, writes require FLUX_API_KEY)
+app.use('/api/*', authMiddleware);
+
+// Health check endpoint (for load balancers/monitoring)
+app.get('/health', (c) => c.json({ status: 'ok' }));
 
 // ============ Live Update Events (SSE) ============
 const sseClients = new Set<ReadableStreamDefaultController<Uint8Array>>();
@@ -331,6 +339,13 @@ app.delete('/api/tasks/:id', (c) => {
     triggerWebhooks('task.deleted', { task }, task.project_id);
   }
   return c.json({ success: true });
+});
+
+// Ready tasks (unblocked, not done, sorted by priority)
+app.get('/api/tasks/ready', (c) => {
+  const projectId = c.req.query('project_id');
+  const tasks = getReadyTasks(projectId);
+  return c.json(tasks);
 });
 
 // Cleanup project (archive done tasks and/or delete empty epics)
