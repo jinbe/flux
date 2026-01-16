@@ -158,17 +158,22 @@ const getMtime = (filePath: string): number => {
 };
 
 let lastMtime = getMtime(DATA_FILE);
+let lastWalMtime = getMtime(DATA_FILE + '-wal');
 
 const handleFileChange = () => {
   const nextMtime = getMtime(DATA_FILE);
-  if (nextMtime !== lastMtime) {
+  const nextWalMtime = getMtime(DATA_FILE + '-wal');
+  if (nextMtime !== lastMtime || nextWalMtime !== lastWalMtime) {
     lastMtime = nextMtime;
+    lastWalMtime = nextWalMtime;
     adapter.read();
     notifyDataChange();
   }
 };
 
 watchFile(DATA_FILE, { interval: 100 }, handleFileChange);
+// Also watch SQLite WAL file for changes (WAL mode writes here first)
+watchFile(DATA_FILE + '-wal', { interval: 100 }, handleFileChange);
 
 app.get('/api/events', () => {
   let clientController: ReadableStreamDefaultController<Uint8Array> | null = null;
